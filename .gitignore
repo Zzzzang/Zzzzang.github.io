@@ -1,0 +1,6 @@
+public
+node_modules
+_config.*
+_admin-config.yml
+push_to_git.sh
+

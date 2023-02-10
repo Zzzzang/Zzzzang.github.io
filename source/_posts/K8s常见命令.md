@@ -1,0 +1,249 @@
+title: K8s常见命令
+author: Zzzang
+tags:
+  - Kubernetes
+categories:
+  - Kubernetes
+date: 2023-02-10 11:44:00
+---
+#  `K8s`常见命令篇
+
+kubectl命令`Tips`:	 万物可加` |grep 'xxxx_keyword' `对结果过滤
+
+## 1.命名空间章 `namespace` :
+
+```shell
+1.1	查看所有命名空间
+	kubectl get namespace
+==> 缩写:kubectl get ns
+	# kubectl get ns [env-hotfix-v2-66-1] -o json > tmp.json
+	# kubectl get ns [env-hotfix-v2-66-1] -o json > /tmp/[env-hotfix-v2-66-1].json
+	# kubectl replace --raw "/api/v1/namespaces/[env-hotfix-v2-66-1]/finalize" -f /tmp/[env-hotfix-v2-66-1].json
+
+1.2	查看命名空间详情
+	kubectl describe namespace xxx
+	
+1.3	删除指定命名空间 以及下面所有的pod
+	kubectl delete ns [env-feature-xxxxx]
+ eg:kubectl delete ns env-hotfix-v2-66-1
+ eg:kubectl delete ns env-hotfix-v2-66-1 --force --grace-period=0
+	
+1.4	创建命名空间
+	kubectl create ns [env-feature-xxxxx]
+```
+
+## 2. 服务章 `services` :
+
+> ( 弹性伸缩概念 Service 1: n Pods)
+
+```shell
+2.1 列出K8s内——所有服务services
+	kubectl get services 
+==> 缩写:kubectl get svc
+
+2.2 列出K8s内——[指定命名空间内]——所有服务services
+	kubectl get services -n [env-feature-xxxxx]
+	kubectl get svc -n [env-feature-xxxxx] |grep mysql
+
+2.3 等价于: 列出——所有 namespace ——所有容器pods
+===> kubectl get pods --all-namespaces 
+===> kubectl get pods --all-namespaces  -o wide
+
+```
+
+## 3. 容器章 `pods` :
+
+```shell
+3.1 列出K8s内——所有容器——pods
+	kubectl get pod
+
+3.2 列出K8s内——所有容器pods——并显示详细信息(ip网络信息)
+	kubectl get pods -o wide 
+
+3.3 列出K8s内——[指定命名空间内]——所有容器pods
+	kubectl get pods -n [env-feature-xxxxx]
+
+3.5 列出K8s内——[指定命名空间内]——单个指定pods
+	kubectl get pod [pod_name]
+	kubectl get pod [pod_name] -n [namespace_name]
+```
+
+## 4. 容器日志章 `logs` :
+
+-	4.1 group pods ≈ service
+
+```shell
+4.1.1 持续监听日志——[指定命名空间内]——指定标签Lable(应用名称)——一套应用容器组的所有pods日志
+	  kubectl logs -n [env-feature-xxxxx] -l app=[ceres-moduleName] -f
+
+4.1.2 持续监听日志——[指定命名空间内]——指定标签Lable(应用名称)——一套应用容器组的所有pods日志——并过滤查询关键字
+	  kubectl logs -n [env-feature-xxxxx] -l app=[ceres-moduleName] -f | grep 'xxxx_keyword'
+
+4.1.3 从现在起实时滚动日志持续输出,并展示最近的10行历史日志
+	  kubectl logs -n [env-feature-xxxxx] -l app=[ceres-moduleName] -f --tail=10 | grep 'xxxx_keyword'
+```
+
+-	4.2 single pod
+
+```shell
+4.2.1 持续监听日志——[指定命名空间内]——指定容器pod名称
+	  kubectl logs -n [env-feature-xxxxx] [ceres-moduleName-pod_random_num] -f
+
+4.2.2 持续监听日志——[指定命名空间内]——指定容器pods名称——并过滤查询关键字
+	  kubectl logs -n [env-feature-xxxxx] [ceres-moduleName-pod_random_num] -f | grep 'xxxx_keyword'
+```
+
+
+## 5. 容器内部执行命令章 `exec` :
+
+```shell
+5.1 进入 指定命名空间 指定mysql容器 执行shell/bash命令
+	kubectl exec -it -n [env-feature-xxxxx] [mysql-pod_random_num] -- sh
+	kubectl exec -it -n [env-feature-xxxxx] [mysql-pod_random_num] -- bash
+ eg:kubectl exec -it -n [env-feature-xxxxx]  mysql-5b9c45bb96-tggll /bin/bash
+#eg:kubectl exec -it -n [env-feature-xxxxx] [mysql-pod_random_num] mysql -u root -p
+
+5.2 组合多管道pod名称传参exec,进入内部执行
+	kubectl exec -it -n [env-feature-xxxxx] $(kubectl -n [env-feature-xxxxx] get pods -l app=mysql -o=name) --  sh
+```
+
+## 6.查看node / pod 的信息:`kubectl describe`
+
+```shell
+6.1 查看node描述：
+	kubectl describe node [node_name]
+
+6.2 查看pod描述：
+	kubectl describe pod [pod_name] -n [namespace_name]
+```
+
+## 额外扩展1 - 查看集群信息:`kubectl cluster-info`
+
+```shell
+> kubectl cluster-info
+
+Kubernetes control plane is running at https://cls-xxxxxxxx.ccs.tencent-cloud.com
+CoreDNS is running at https://cls-xxxxxxxx.ccs.tencent-cloud.com/api/v1/namespaces/kube-system/services/kube-dns:dns-tcp/proxy
+
+To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
+```
+
+## 额外扩展2 - 查看各组件信息:`kubectl get componentstatuses`
+
+```shell
+> kubectl get componentstatuses
+
+Warning: v1 ComponentStatus is deprecated in v1.19+
+NAME               STATUS    MESSAGE            ERROR   
+controller-manager Unhealthy Get "http://127.0.0.1:10252/healthz": dial tcp 127.0.0.1:10252: connect: connection refused
+scheduler          Unhealthy Get "http://127.0.0.1:10251/healthz": dial tcp 127.0.0.1:10251: connect: connection refused
+etcd-1             Healthy   {"health":"true","reason":""}
+etcd-0             Healthy   {"health":"true"}
+```
+
+## 额外扩展3 - kubectl所有帮助指令
+
+> kubectl --help
+
+```shell
+kubectl用于控制Kubernetes集群管理器。
+更多信息请访问:https://kubernetes.io/docs/reference/kubectl/overview/
+
+Basic Commands (Beginner):基本命令(初学者):
+ create   Create a resource from a file or from stdin.
+		  从文件或stdin中创建资源。 
+ expose   Take a replication controller, service, deployment or pod and expose it as a new 
+		  获取一个复制控制器、服务、部署或pod，并将其公开为一个新的Kubernetes服务 Kubernetes Service
+ run      Run a particular image on the cluster
+		  run在集群上运行一个特定的映像 
+ set      Set specific features on objects
+		  set设置对象的具体特性 
+
+Basic Commands (Intermediate):基本命令(中级):
+  explain Documentation of resources
+		  资源文档
+  get     Display one or many resources
+		  显示一个或多个资源
+  edit    Edit a resource on the server
+		  edit编辑服务器上的资源
+  delete  Delete resources by filenames, stdin, resources and names, or by resources and label selector
+		  delete按文件名、stdin、资源和名称或按资源和标签选择器删除资源
+
+Deploy Commands:部署命令:
+  rollout    Manage the rollout of a resource
+			 rollout管理资源的滚出
+  scale      Set a new size for a Deployment, ReplicaSet or Replication Controller
+			 scale为部署控制器、复制集控制器或复制控制器设置新的大小
+  autoscale  Auto-scale a Deployment, ReplicaSet, or ReplicationController
+			 autoscale自动缩放Deployment、ReplicaSet或ReplicationController
+
+Cluster Management Commands:集群管理命令:
+  certificate   Modify certificate resources.
+				certificate修改证书资源。
+  cluster-info  Display cluster info
+				cluster-info显示集群信息
+  top           Display Resource (CPU/Memory/Storage) usage.
+				top显示资源(CPU/内存/存储)占用率。
+  cordon        Mark node as unschedulable
+				将节点标记为不可调度
+  uncordon      Mark node as schedulable
+				将节点标记为可调度的
+  drain         Drain node in preparation for maintenance
+				drain排水节点，为维护做好准备
+  taint         Update the taints on one or more nodes
+				taint更新一个或多个节点上的污点
+
+Troubleshooting and Debugging Commands:故障处理和调试命令:
+  describe      Show details of a specific resource or group of resources
+				描述显示特定资源或资源组的详细信息
+  logs          Print the logs for a container in a pod
+				logs打印pod中容器的日志
+  attach        Attach to a running container
+				attach附着在运行中的容器上
+  exec          Execute a command in a container
+				exec在容器中执行命令
+  port-forward  Forward one or more local ports to a pod
+				port-forward将一个或多个本地端口转发到pod
+  proxy         Run a proxy to the Kubernetes API server
+				proxy向Kubernetes API服务器运行代理
+  cp            Copy files and directories to and from containers.
+				在容器中拷贝文件和目录。
+  auth          Inspect authorization
+				检查授权
+  debug         Create debugging sessions for troubleshooting workloads and nodes
+				为故障排除工作负载和节点创建调试会话
+
+Advanced Commands:先进的命令
+  diff          Diff live version against would-be applied version
+				diff实际版本与潜在应用版本的差异
+  apply         Apply a configuration to a resource by filename or stdin
+				通过文件名或stdin将配置应用到资源
+  patch         Update field(s) of a resource
+				patch资源的更新字段
+  replace       Replace a resource by filename or stdin
+				replace用文件名或标准输入替换资源
+  wait          Experimental: Wait for a specific condition on one or many resources.
+				实验性:等待一个或多个资源上的特定条件。
+  kustomize     Build a kustomization target from a directory or a remote url.
+				从目录或远程url构建一个kustomize目标。
+
+Settings Commands:设置命令
+  label         Update the labels on a resource
+				label更新资源标签
+  annotate      Update the annotations on a resource
+				注解更新资源的注解
+  completion    Output shell completion code for the specified shell (bash or zsh)
+				输出指定shell的shell补全代码(bash或zsh)
+
+Other Commands:其他命令
+  api-resources Print the supported API resources on the server
+				API -resources打印服务器上支持的API资源
+  api-versions  Print the supported API versions on the server, in the form of "group/version"
+				打印服务器上支持的API版本，格式为"group/version"
+  config        Modify kubeconfig files
+				config修改kubecconfig文件
+  plugin        Provides utilities for interacting with plugins.
+				plugin提供与插件交互的实用程序
+  version       Print the client and server version information
+				version打印客户端和服务器版本信息
+```
