@@ -6,7 +6,7 @@ name: Deploy Jekyll with GitHub Pages dependencies preinstalled
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: ["master"]
+    branches: ["github-pages"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -36,6 +36,8 @@ jobs:
         with:
           source: ./
           destination: ./_site
+          # 如果使用自定义域名，还需要添加下面一行配置
+          cname: www.goodfun.me
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
 
@@ -50,3 +52,6 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
+        with:
+          # 如果使用自定义域名，还需要添加下面一行配置
+          cname: www.goodfun.me
