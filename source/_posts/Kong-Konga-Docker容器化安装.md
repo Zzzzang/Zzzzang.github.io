@@ -1,14 +1,18 @@
 title: Kong/Konga - Docker容器化安装
+toc: true
+cover: /gallery/covers/CP77-COVER.jpg
 author: Zzzang
 tags:
   - Docker
-categories: []
+categories:
+  - Docker
 date: 2023-02-06 01:37:00
 ---
 # 1.0 安装kong + postgresDB
 ```
 docker network create kong-net
 ```
+<!--more-->
 ```
 docker pull postgres:latest
 ```
@@ -20,6 +24,7 @@ docker run -d --name kong-database \
                -e "POSTGRES_DB=kong" \
                postgres:latest
 ```
+
 压缩版：`docker run -d --name kong-database --network=kong-net -p 5432:5432 -e "POSTGRES_USER=kong" -e "POSTGRES_DB=kong" postgres:latest`
 
 `docker pull kong:latest`
@@ -82,8 +87,3 @@ docker run --rm -p 8080:8080 --network=kong-net pgbi/kong-dashboard  start --kon
 
 
 `http://{konga-ip}:1337/`
-
-
-
-
-

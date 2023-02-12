@@ -1,4 +1,6 @@
 title: Linux 磁盘挂载 （阿里云数据磁盘）
+toc: true
+cover: /gallery/covers/CP77-COVER.jpg
 author: Zzzang
 tags:
   - WebDav
@@ -9,6 +11,8 @@ date: 2023-02-06 01:36:00
 [参考链接 https://blog.csdn.net/ju_362204801/article/details/122873049](https://blog.csdn.net/ju_362204801/article/details/122873049)
 
 一、查看挂载之前的情况
+<!--more-->
+
 1、检查现在磁盘情况
 使用 `df -h`  命令来查看一下磁盘情况
 ![title](https://www.zzzang.cn//api/file/getImage?fileId=62de60195cfbab673300015e)

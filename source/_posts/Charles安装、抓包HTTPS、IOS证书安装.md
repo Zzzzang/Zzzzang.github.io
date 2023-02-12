@@ -1,4 +1,6 @@
 title: Charles安装、抓包HTTPS、IOS证书安装
+toc: true
+cover: /gallery/covers/CP77-COVER.jpg
 author: Zzzang
 tags:
   - https proxy
@@ -9,6 +11,8 @@ date: 2023-02-06 01:38:00
 ---
 Charles简介
 Charles是一个HTTP代理服务器,HTTP监视器,反转代理服务器，当浏览器连接Charles的代理访问互联网时，Charles可以监控浏览器发送和接收的所有数据。它允许一个开发者查看所有连接互联网的HTTP通信，这些包括request, response和HTTP headers （包含cookies与caching信息）。
+
+<!--more-->
 
 一、下载地址：https://www.charlesproxy.com/
 1.选择对应的操作系统
