@@ -1,6 +1,10 @@
 public
 node_modules
-_config.*
-_admin-config.yml
 push_to_git.sh
-
+#_config.*
+_admin-config.yml
+_config.icarus.yml.*
+_config.icarus.yml_*
+_config.landscape.yml
+_config.yml_prod_bak
+db.json

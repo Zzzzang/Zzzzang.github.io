@@ -1,0 +1,245 @@
+version: 5.1.0
+# Icarus theme variant, can be "default" or "cyberpunk"
+#variant: default
+variant: cyberpunk
+logo: /img/cyberpunk-logo.svg
+head:
+    favicon: /img/favicon.svg
+    manifest:
+        name: zzang
+        short_name: zzang 
+        start_url: 
+        theme_color: 
+        background_color: 
+        display: standalone
+        icons:
+            -
+                src: ''
+                sizes: ''
+                type: 
+    open_graph:
+        title: zzang——open_graph
+        type: blog
+        url: 
+        image: 
+        site_name: zzang-site_name——open_graph
+        author: zzang——open_graph
+        description:  zzang—description-open_graph
+        twitter_card: 
+        twitter_id: 
+        twitter_site: 
+        google_plus: 
+        fb_admins: 
+        fb_app_id: 
+    structured_data:
+        title: 
+        description: 
+        url: 
+        author: 
+        publisher: 
+        publisher_logo: 
+        image: 
+    meta:
+        - ''
+    rss: 
+navbar:
+    menu:
+        Home: /
+        Archives: /archives
+        Categories: /categories
+        Tags: /tags
+        About: /about
+    links:
+        Download on GitHub:
+            icon: fab fa-github
+            url: https://github.com/zzzzang
+footer:
+    links:
+        Creative Commons:
+            icon: fab fa-creative-commons
+            url: https://creativecommons.org/
+        Attribution 4.0 International:
+            icon: fab fa-creative-commons-by
+            url: https://creativecommons.org/licenses/by/4.0/
+        Download on GitHub:
+            icon: fab fa-github
+            url: hhttps://github.com/zzzzang
+article:
+    highlight:
+        theme: atom-one-light
+        #theme: xt256 # cyberpunk highlight
+        clipboard: true
+        fold: unfolded
+    readtime: true
+    update_time: true
+    licenses:
+        Creative Commons:
+            icon: fab fa-creative-commons
+            url: https://creativecommons.org/
+        Attribution:
+            icon: fab fa-creative-commons-by
+            url: https://creativecommons.org/licenses/by/4.0/
+        Noncommercial:
+            icon: fab fa-creative-commons-nc
+            url: https://creativecommons.org/licenses/by-nc/4.0/
+search:
+    type: insight
+    index_pages: true
+comment:
+    type: valine
+    app_id: llHhpSh9glpj74B5LKNSDfju-9Nh9j0Va
+    app_key: VjNKAlPEsymEy8fdbdFcinhd
+    placeholder: "ヾﾉ≧∀≦)o来啊，评论区整活啊!"                 # 可选填
+    avatar: mm                      # 可选填
+    avatar_force: false             # 可选填
+    meta: ["nick", "mail", "link"]  # 可选填
+    page_size: 10                   # 可选填
+    lang: zh-CN                     # 可选填
+    visitor: false                  # 可选填
+    highlight: true                 # 可选填
+    record_ip: false                # 可选填
+    server_urls:                    # 可选填
+    emoji_cdn:                      # 可选填
+    emoji_maps:                     # 可选填
+    enable_qq: false                # 可选填
+    required_fields: []             # 可选填
+donates:
+#    -
+#        type: afdian
+#        url: ''
+    -
+        type: alipay
+        qrcode: 'https://www.zzzang.cn/api/file/getImage?fileId=63e5d9da5cfbab6733001745'
+#    -
+#        type: buymeacoffee
+#        url: ''
+#    -
+#        type: patreon
+#        url: ''
+#    -
+#        type: paypal
+#        business: ''
+#        currency_code: USD
+    -
+        type: wechat
+        qrcode: 'https://www.zzzang.cn/api/file/getImage?fileId=63e5d9da5cfbab6733001745'
+share:
+    type: addtoany # 分享按钮
+#    type: sharethis
+#    install_url: ''
+sidebar:
+    left:
+        sticky: false
+    right:
+        sticky: true # 右侧目录导航固定悬浮
+widgets:
+    -
+        position: left
+        type: profile
+        author: Zzzang
+        author_title: Javaer & Goer
+        location: China ShenZhen
+        avatar: https://www.zzzang.cn/public/upload/517/5368c1aa99c37b029d000001/themes/627a81485cfbab3a4e00153f/images/avatar-ILoveWork.gif 
+        avatar_rounded: false
+        gravatar: 
+        follow_link: https://github.com/Zzzzang
+        social_links:
+            Github:
+                icon: fab fa-github
+                url: https://github.com/Zzzzang
+            Facebook:
+                icon: fab fa-facebook
+                url: https://facebook.com
+            Twitter:
+                icon: fab fa-twitter
+                url: https://twitter.com
+            Dribbble:
+                icon: fab fa-dribbble
+                url: https://dribbble.com
+            RSS:
+                icon: fas fa-rss
+                url: /
+    -
+        position: right
+        type: toc # 文章内头部增加toc: true
+        index: true # 是否显示目录项目的序号
+        collapsed: true
+        depth: 3
+    -
+        position: left
+        type: links #友情链接
+        links:
+            Leanote: https://www.zzzang.cn
+            Github: https://github.com/Zzzzang
+            Hexo: https://hexo.io
+            Bulma: https://bulma.io
+    -
+        position: left
+        type: categories # 文章分类
+    -
+        position: left
+        type: recent_posts # 最近文章
+    -
+        position: left
+        type: archives # 文章归档
+    -
+        position: left
+        type: tags # 文章标签
+        order_by: name # 可选项。按名称(name)或长度(length)来排序。加上`-`前缀来倒序排列
+        amount: # [20]可选项。最多显示的标签数量。留空以显示所有标签
+        show_count: true # 可选项。是否显示标签名称右侧的文章数量
+    -
+        position: left
+        type: subscribe_email # 邮件订阅
+        description: 
+        feedburner_id: ''
+#    -
+#        position: left
+#        type: adsense # 谷歌广告 https://www.google.com/adsense
+#        client_id: 'ca-pub-xxxxxxxx'
+#        slot_id: 'xxxxxxx'
+#    -
+#        position: left
+#        type: followit # follow.it邮件订阅插件
+#        description: 
+#        action_url: ''
+#        verification_code: ''
+plugins:
+    animejs: true
+    back_to_top: true
+    baidu_analytics:
+        tracking_id: 
+    bing_webmaster:
+        tracking_id: 
+    busuanzi: false
+    cnzz:
+        id: 
+        web_id: 
+    cookie_consent:
+        type: info
+        theme: edgeless
+        static: false
+        position: bottom-left
+        policyLink: https://www.cookiesandyou.com/
+    gallery: true
+    google_analytics:
+        tracking_id: 
+    hotjar:
+        site_id: 
+    katex: false
+    mathjax: false
+    outdated_browser: true #浏览器升级提醒 (Outdated Browser)
+    progressbar: true
+    statcounter:
+        project: 
+        security: 
+    twitter_conversion_tracking:
+        pixel_id: 
+providers:
+    cdn: jsdelivr
+    fontcdn: google
+    iconcdn: fontawesome
+# BuSuanZi site/page view counter
+# https://busuanzi.ibruce.info
+# 网站访问量与访客量统计
+busuanzi: true
