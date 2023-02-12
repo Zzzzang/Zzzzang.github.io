@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Charles安装、抓包HTTPS、IOS证书安装 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Charles简介Charles是一个HTTP代理服务器,HTTP监视器,反转代理服务器，当浏览器连接Charles的代理访问互联网时，Charles可以监控浏览器发送和接收的所有数据。它允许一个开发者查看所有连接互联网的HTTP通信，这些包括request, response和HTTP headers （包含cookies与caching信息）。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Charles安装、抓包HTTPS、IOS证书安装">
+<meta property="og:url" content="http://example.com/2023/02/05/Charles%E5%AE%89%E8%A3%85%E3%80%81%E6%8A%93%E5%8C%85HTTPS%E3%80%81IOS%E8%AF%81%E4%B9%A6%E5%AE%89%E8%A3%85/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Charles简介Charles是一个HTTP代理服务器,HTTP监视器,反转代理服务器，当浏览器连接Charles的代理访问互联网时，Charles可以监控浏览器发送和接收的所有数据。它允许一个开发者查看所有连接互联网的HTTP通信，这些包括request, response和HTTP headers （包含cookies与caching信息）。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://www.zzzang.cn/api/file/getImage?fileId=627b68d75cfbab3a4e00156a">
+<meta property="og:image" content="https://www.zzzang.cn/api/file/getImage?fileId=627b68d35cfbab3a4e001569">
+<meta property="og:image" content="https://www.zzzang.cn/api/file/getImage?fileId=627b68cf5cfbab3a4e001568">
+<meta property="og:image" content="https://www.zzzang.cn/api/file/getImage?fileId=627b68cb5cfbab3a4e001567">
+<meta property="og:image" content="https://www.zzzang.cn/api/file/getImage?fileId=627b68b15cfbab3a4e001566">
+<meta property="og:image" content="https://www.zzzang.cn/api/file/getImage?fileId=627b68aa5cfbab3a4e001565">
+<meta property="og:image" content="https://www.zzzang.cn/api/file/getImage?fileId=627b68a25cfbab3a4e001564">
+<meta property="og:image" content="https://www.zzzang.cn/api/file/getImage?fileId=627b68895cfbab3a4e001563">
+<meta property="og:image" content="https://www.zzzang.cn/api/file/getImage?fileId=627b68745cfbab3a4e001562">
+<meta property="og:image" content="https://www.zzzang.cn/api/file/getImage?fileId=627b686d5cfbab3a4e001561">
+<meta property="og:image" content="https://www.zzzang.cn/api/file/getImage?fileId=6281f9085cfbab3a4e0015dc">
+<meta property="og:image" content="https://www.zzzang.cn/api/file/getImage?fileId=6281f9315cfbab3a4e0015dd">
+<meta property="og:image" content="https://www.zzzang.cn/api/file/getImage?fileId=6281f95f5cfbab3a4e0015de">
+<meta property="og:image" content="https://www.zzzang.cn/api/file/getImage?fileId=6281f8c25cfbab3a4e0015db">
+<meta property="og:image" content="https://www.zzzang.cn/api/file/getImage?fileId=627b684c5cfbab3a4e00155c">
+<meta property="og:image" content="https://www.zzzang.cn/api/file/getImage?fileId=627b68455cfbab3a4e00155b">
+<meta property="og:image" content="https://www.zzzang.cn/api/file/getImage?fileId=627b68265cfbab3a4e001559">
+<meta property="og:image" content="https://www.zzzang.cn/api/file/getImage?fileId=627b68095cfbab3a4e001558">
+<meta property="article:published_time" content="2023-02-05T17:38:00.000Z">
+<meta property="article:modified_time" content="2023-02-10T17:33:31.716Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="https proxy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.zzzang.cn/api/file/getImage?fileId=627b68d75cfbab3a4e00156a">
+  
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Charles安装、抓包HTTPS、IOS证书安装" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2023/02/05/Charles%E5%AE%89%E8%A3%85%E3%80%81%E6%8A%93%E5%8C%85HTTPS%E3%80%81IOS%E8%AF%81%E4%B9%A6%E5%AE%89%E8%A3%85/" class="article-date">
+  <time datetime="2023-02-05T17:38:00.000Z" itemprop="datePublished">2023-02-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/charles/">charles</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Charles安装、抓包HTTPS、IOS证书安装
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Charles简介<br>Charles是一个HTTP代理服务器,HTTP监视器,反转代理服务器，当浏览器连接Charles的代理访问互联网时，Charles可以监控浏览器发送和接收的所有数据。它允许一个开发者查看所有连接互联网的HTTP通信，这些包括request, response和HTTP headers （包含cookies与caching信息）。</p>
+<span id="more"></span>
+
+<p>一、下载地址：<a target="_blank" rel="noopener" href="https://www.charlesproxy.com/">https://www.charlesproxy.com/</a><br>1.选择对应的操作系统<br>2.点击 DOwnload a free trial 进行下载<br><img src="https://www.zzzang.cn/api/file/getImage?fileId=627b68d75cfbab3a4e00156a" alt="title"></p>
+<p>3.安装成功后，打开Charles的主页<br><img src="https://www.zzzang.cn/api/file/getImage?fileId=627b68d35cfbab3a4e001569" alt="title"></p>
+<p>二 Web 抓取HTTPS协议<br>虽然现在Charles能够直接抓包了，但是https协议的报我们是抓取不了的，需要安装SSL证书才可以<br>Charles配置操作如下：<br>2.1，点击顶部菜单栏【Help】–&gt;选择【SSL Proxying】，点击【install Charles Root Certificate 】安装Charles根证书即可；<br><img src="https://www.zzzang.cn/api/file/getImage?fileId=627b68cf5cfbab3a4e001568" alt="title"><br>2.2 点击安装证书 -&gt; 本地计算机 -&gt; 将所有证书都放到下列储存 -&gt; 点击下一步完成即可<br><img src="https://www.zzzang.cn/api/file/getImage?fileId=627b68cb5cfbab3a4e001567" alt="title"><br>2.3 设置HTTP/HTTPS协议端口<br>Proxy -&gt; SSL Proxying Settiongs 在弹出选项卡中，勾选【Enable SSL Proxying】点击【add】<br>添加以下Host和Port</p>
+<pre><code>1. *：*
+2. *：443
+3. *：80
+
+ 解释：
+     在Host输入【*】表示接收任何主机
+     80是http协议的默认端口
+     443是https协议的默认端口
+</code></pre>
+<p><img src="https://www.zzzang.cn/api/file/getImage?fileId=627b68b15cfbab3a4e001566" alt="title"><br>2.4 打开抓取web端设置<br>Proxy -&gt; Windows Proxy 勾选中即可<br><img src="https://www.zzzang.cn/api/file/getImage?fileId=627b68aa5cfbab3a4e001565" alt="title"><br>2.5 访问 <a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a> 能够抓取到接口并且接口下有数据表示成功<br><img src="https://www.zzzang.cn/api/file/getImage?fileId=627b68a25cfbab3a4e001564" alt="title"></p>
+<pre><code>注意：如果接口下抓取是unknown表示失败
+1. 协议未配置
+2. 证书未安装
+3. 防火墙未关闭
+</code></pre>
+<p>三 Charles手机抓包证书安装(IOS)<br>App抓包<br>Charles抓包不仅仅可以抓取来在电脑端的HTTP请求，也能够抓取来自App发出的HTTP请求，但是手机抓包需要在电脑端配置下，并且同时需要手机和电脑在同一网络下并且手机VPN也需要关闭</p>
+<p>3.1 端口号设置 Proxy -&gt; Proxy Setting 默认端口号 8888<br><img src="https://www.zzzang.cn/api/file/getImage?fileId=627b68895cfbab3a4e001563" alt="title"><br>3.2 查看自己IP地址和端口号和下载证书网址<br>Help -&gt; SSl Proxying -&gt; Install Charles Root Certificate on a mobile Device or Remote Browser<br><img src="https://www.zzzang.cn/api/file/getImage?fileId=627b68745cfbab3a4e001562" alt="title"><br><img src="https://www.zzzang.cn/api/file/getImage?fileId=627b686d5cfbab3a4e001561" alt="title"><br>3.3手机端设置：<br>1，打开手机的设置页面；<br>2，选择【无线局域网】；<br>3，IOS点击连接的WIFI后面的感叹号，安卓应该是长按连接的WIFI；（注：这里主要以IOS为例）<br>4，点击【配置代理】–&gt;【手动】；<br>5，输入本机【IP地址】以及【端口号】，根据自己情况合理配置；<br>6，点击【存储】<br><img src="https://www.zzzang.cn/api/file/getImage?fileId=6281f9085cfbab3a4e0015dc" alt="title"><br><img src="https://www.zzzang.cn/api/file/getImage?fileId=6281f9315cfbab3a4e0015dd" alt="title"><br><img src="https://www.zzzang.cn/api/file/getImage?fileId=6281f95f5cfbab3a4e0015de" alt="title"><br>再次说明：服务器IP和端口号需要用到自己的IP和Charles上设置的端口<br>查看方法：Help -&gt; SSl Proxying -&gt; Install Charles Root Certificate on a mobile Device or Remote Browser（步骤3.2 有截图）<br><img src="https://www.zzzang.cn/api/file/getImage?fileId=6281f8c25cfbab3a4e0015db" alt="title"><br>3.4 检验代理配置是否成功<br>打开浏览器验证下手机请求，当我们看到Charles里能抓到这个连接，就说明配置没问题，看到unknown，这个不要紧，那是我们没有安装针对手机端的证书，下面继续我们手机端HTTPS证书安装<br><img src="https://www.zzzang.cn/api/file/getImage?fileId=627b684c5cfbab3a4e00155c" alt="title"><br>抓取手机HTTPS协议<br>通过上面的设置，虽然来自我们手机端的Http协议请求可以抓取到，但是HTTPS协议的包是不能抓取的，需要安装配置证书才可以，现在手机上大多数都已经切到https很少由http协议的了</p>
+<p>3.5 Charles配置：<br>手机打开浏览器输入 chls.pro/ssl,如下提示，点击允许（如果下载失败，请更换浏览器重新在下）<br><img src="https://www.zzzang.cn/api/file/getImage?fileId=627b68455cfbab3a4e00155b" alt="title"><br>3.6 进入设置 -&gt; 描述文件与设备管理 -&gt; 点击未安装的证书进行安装<br><img src="https://www.zzzang.cn/api/file/getImage?fileId=627b68265cfbab3a4e001559" alt="title"><br>3.7 安装成功后需要在 通用 -&gt; 关于本机 -&gt; 证书信任设置 中勾选Charles证书（针对于IOS手机）<br><img src="https://www.zzzang.cn/api/file/getImage?fileId=627b68095cfbab3a4e001558" alt="title"><br>最后，重新打开charles，手机访问网页/app就可以了</p>
+<p>注意事项：<br>手机和电脑需要在同一网络下<br>手机VPN需要关闭<br>不同电脑对应不同证书，所以说你连接其他电脑需要重新下载手机证书<br>如果抓出来的接口显示Unknown可以把防火墙关闭,再打开charles重新抓取</p>
+<p>【转载自CSDN,作者:qq_46022251】<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_46022251/article/details/121653287">https://blog.csdn.net/qq_46022251/article/details/121653287</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/02/05/Charles%E5%AE%89%E8%A3%85%E3%80%81%E6%8A%93%E5%8C%85HTTPS%E3%80%81IOS%E8%AF%81%E4%B9%A6%E5%AE%89%E8%A3%85/" data-id="cle0pp5xo0004y515fl1uftq6" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/https-proxy/" rel="tag">https proxy</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/02/10/K8s%E5%B8%B8%E8%A7%81%E5%91%BD%E4%BB%A4/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          K8s常见命令
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/02/05/Kong-Konga-Docker%E5%AE%B9%E5%99%A8%E5%8C%96%E5%AE%89%E8%A3%85/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Kong/Konga - Docker容器化安装</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

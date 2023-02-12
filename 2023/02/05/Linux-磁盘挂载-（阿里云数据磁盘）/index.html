@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Linux 磁盘挂载 （阿里云数据磁盘） | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="参考链接 https:&#x2F;&#x2F;blog.csdn.net&#x2F;ju_362204801&#x2F;article&#x2F;details&#x2F;122873049 一、查看挂载之前的情况">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux 磁盘挂载 （阿里云数据磁盘）">
+<meta property="og:url" content="http://example.com/2023/02/05/Linux-%E7%A3%81%E7%9B%98%E6%8C%82%E8%BD%BD-%EF%BC%88%E9%98%BF%E9%87%8C%E4%BA%91%E6%95%B0%E6%8D%AE%E7%A3%81%E7%9B%98%EF%BC%89/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="参考链接 https:&#x2F;&#x2F;blog.csdn.net&#x2F;ju_362204801&#x2F;article&#x2F;details&#x2F;122873049 一、查看挂载之前的情况">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://www.zzzang.cn//api/file/getImage?fileId=62de60195cfbab673300015e">
+<meta property="og:image" content="https://www.zzzang.cn//api/file/getImage?fileId=62de60305cfbab6733000160">
+<meta property="og:image" content="https://www.zzzang.cn//api/file/getImage?fileId=62de60435cfbab6733000161">
+<meta property="og:image" content="https://www.zzzang.cn//api/file/getImage?fileId=62de604a5cfbab6733000162">
+<meta property="og:image" content="https://www.zzzang.cn//api/file/getImage?fileId=62de60525cfbab6733000163">
+<meta property="og:image" content="https://www.zzzang.cn//api/file/getImage?fileId=62de60605cfbab6733000164">
+<meta property="og:image" content="https://www.zzzang.cn//api/file/getImage?fileId=62de606e5cfbab6733000165">
+<meta property="article:published_time" content="2023-02-05T17:36:00.000Z">
+<meta property="article:modified_time" content="2023-02-10T17:34:03.965Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="WebDav">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.zzzang.cn//api/file/getImage?fileId=62de60195cfbab673300015e">
+  
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Linux-磁盘挂载-（阿里云数据磁盘）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2023/02/05/Linux-%E7%A3%81%E7%9B%98%E6%8C%82%E8%BD%BD-%EF%BC%88%E9%98%BF%E9%87%8C%E4%BA%91%E6%95%B0%E6%8D%AE%E7%A3%81%E7%9B%98%EF%BC%89/" class="article-date">
+  <time datetime="2023-02-05T17:36:00.000Z" itemprop="datePublished">2023-02-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/WebDav/">WebDav</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Linux 磁盘挂载 （阿里云数据磁盘）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/ju_362204801/article/details/122873049">参考链接 https://blog.csdn.net/ju_362204801/article/details/122873049</a></p>
+<p>一、查看挂载之前的情况</p>
+<span id="more"></span>
+
+<p>1、检查现在磁盘情况<br>使用 <code>df -h</code>  命令来查看一下磁盘情况<br><img src="https://www.zzzang.cn//api/file/getImage?fileId=62de60195cfbab673300015e" alt="title"><br>上图就是我没对单独购买的硬盘进行挂载之前用 df -h 查看的情况</p>
+<p>可以看到，没挂载之前确实是只显示了一块40G的硬盘，没显示另外一块40G的硬盘</p>
+<p>2、查看硬盘个数及分区<br>使用 <code>fdisk -l</code>  命令来查看一下硬盘个数和分区</p>
+<p><img src="https://www.zzzang.cn//api/file/getImage?fileId=62de60305cfbab6733000160" alt="title"><br>从上图可以看到2块硬盘都在</p>
+<p>一块是 /dev/vda 这一块有分区</p>
+<p>另外一块是 /dev/vdb 这一块没分区</p>
+<p>你买了以后，两块硬盘就都在的，只不过是另外一块，你没设置分区挂载，还不能用</p>
+<p>所以，下边我们操作一下分区、挂载</p>
+<p>二、进行分区挂载<br>1、使用  <code>fdisk /dev/vdb</code>    命令进行分区<br><img src="https://www.zzzang.cn//api/file/getImage?fileId=62de60435cfbab6733000161" alt="title"></p>
+<p>2、再次查看磁盘个数及分区 <code>fdisk -l</code><br><img src="https://www.zzzang.cn//api/file/getImage?fileId=62de604a5cfbab6733000162" alt="title"></p>
+<p>发现 最下面比刚才多了一个分区</p>
+<p>3、格式化新分区<br>使用命令   <code>mkfs.ext3 /dev/vdb</code>  来格式化新分区（使用ext3扩展文件系统）<br><img src="https://www.zzzang.cn//api/file/getImage?fileId=62de60525cfbab6733000163" alt="title"></p>
+<p>4、创建挂载目录<br>cd /  进入最外一层根目录，在根目录下 使用 mkdir 命令来创建一个你想要的新目录，我这里新目录取名为extra<br><code>mkdir extra</code></p>
+<p>5、挂载分区到刚才创建的目录<br>使用 <code>mount /dev/vdb /extra/</code>  命令进行挂载<br><img src="https://www.zzzang.cn//api/file/getImage?fileId=62de60605cfbab6733000164" alt="title"><br>然后再次 <code>df -h</code> 看一下，就可以看到新的硬盘分区已经挂载上去了</p>
+<p><code>lsblk -f</code> 命令可以列出文件系统块设备，且能显示设备的 UUID 值。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@iZwz9exnhbzxes54x0ca6lZ ROOT]# lsblk -f</span><br><span class="line">NAME   FSTYPE LABEL UUID                                 MOUNTPOINT</span><br><span class="line">vda                                                      </span><br><span class="line">└─vda1 ext4         aa2763ec-3885-4ef2-ba3c-76bbd5f1cb79 /</span><br><span class="line">vdb    ext3         fcdefb8d-eb6d-4669-afe9-0e72c145080e /data</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<p>6、设置开机自动挂载<br>使用命令 <code>vim /etc/fstab</code></p>
+<p>把  /dev/vdb /extra ext3 defaults 0 0<br><img src="https://www.zzzang.cn//api/file/getImage?fileId=62de606e5cfbab6733000165" alt="title"><br>这个内容写进去，然后保存</p>
+<p> 用命令 <code>reboot</code> 重启一下服务器就ok了</p>
+<p> 7.取消挂载<br>取消目录占用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fuser -k /file1</span><br><span class="line">fuser -k /dev/sdb1</span><br></pre></td></tr></table></figure>
+<p>取消挂载点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">umount /file1</span><br><span class="line">umount /dev/sdb1</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/02/05/Linux-%E7%A3%81%E7%9B%98%E6%8C%82%E8%BD%BD-%EF%BC%88%E9%98%BF%E9%87%8C%E4%BA%91%E6%95%B0%E6%8D%AE%E7%A3%81%E7%9B%98%EF%BC%89/" data-id="cle0pp5yc0009y515a7qc47ez" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WebDav/" rel="tag">WebDav</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/02/05/Kong-Konga-Docker%E5%AE%B9%E5%99%A8%E5%8C%96%E5%AE%89%E8%A3%85/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Kong/Konga - Docker容器化安装
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
